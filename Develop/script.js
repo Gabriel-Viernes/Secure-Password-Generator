@@ -11,7 +11,7 @@ function yesNoCheck(x) {
 function getPassLength() {
   let getLength = prompt("Please enter, in numbers, your desired password length. Length must be between 8 and 128 characters.");
   let passLength = Number(getLength);
-  if(passLength < 8 || passLength > 128 || passLength===NaN) {
+  if((passLength < 8) || (passLength > 128) || (Number.isNaN(passLength) === true)) {
     alert(`Invalid format, password length must be in numbers and between 8 and 128. Please generate another password.`);
     return false;
   } else {
