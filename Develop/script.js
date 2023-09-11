@@ -45,67 +45,48 @@ function randChar(input) {
       }
     }
   }
-  console.log(`chosen charsets are: ${inclCharSet}`);
   // sets the first index in password to avoid undefined
   let tempCharSet = inclCharSet[Math.floor(Math.random() * inclCharSet.length)]
-  console.log(`tempCharSet =` + tempCharSet);
   let chosenChar = tempCharSet.charAt(Math.floor(Math.random() * tempCharSet.length));
-  console.log(`chosenChar: ${chosenChar}`);
   password = chosenChar;
   for (let i = 1; i < input[4]; i++){
     // choose random character set from inclCharset
     tempCharSet = inclCharSet[Math.floor(Math.random() * inclCharSet.length)]
-    console.log(`tempCharSet =` + tempCharSet);
     // choose random char from chosen string
     chosenChar = tempCharSet.charAt(Math.floor(Math.random() * tempCharSet.length));
-    console.log(`chosenChar: ${chosenChar}`);
     password += chosenChar;
-    console.log(`password at this stage is: ${password}`);
   }
   return password;
 }
-
-
 // creates an array with charset selections and chosen password length
 // returns array with charset selections and chosen password length
 function promptCritGen() {
   let i = getPassLength();
-  console.log(`Chosen password length: ${i}`);
   if(i === false) {
     console.log(`Invalid length specified`)
     return undefined;
   }
   let lowerQuery = prompt("Would you like your password to include lowercase characters? Type Y/N");
-  console.log(`lowercase selection ${lowerQuery}`);
   let upperQuery = prompt("Would you like your password to include uppercase characters? Type Y/N");
-  console.log(`uppercase selection ${upperQuery}`);
   let numQuery = prompt("Would you like your password to include numbers? Type Y/N");
-  console.log(`number selection ${numQuery}`);
   let specQuery = prompt("Would you like your password to include special characters? Type Y/N");
-  console.log(`special character selection ${specQuery}`);
   let queryArr = [lowerQuery,upperQuery,numQuery,specQuery];
   for (let i = 0; i < queryArr.length; i++) {
     if(yesNoCheck(queryArr[i]) === false) {
-      console.log(`Invalid response detected, canceling...`);
       return;
     }
   }
   queryArr.push(i);
-  console.log(`queryarr = ${queryArr}`);
   return queryArr;
 }
-
 // generates the password
 function generatePassword() {
-  console.log("Password generation initialized")
-  // prompt generator
+  // asks user for desired password criteria
   let criteria = promptCritGen();
   if(criteria === undefined) {
-    console.log(`Password generation canceled`);
     alert(`Invalid selection, please try again`)
     return;
   } 
-  console.log(`queryArr is:` + criteria);
   return randChar(criteria); 
 }
 
