@@ -26,35 +26,35 @@ function randChar(input) {
   let upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
   let numeral = "0123456789"
   let special =  "!#$%&'()*+,-./:;<=>?@[\]^_`{|}~"
-  let inclCharset = [];
+  let inclCharSet = [];
   let password;
   // 
   for (let i = 0; i < 4; i++) {
     if((input[i] === `Y`) || (input[i] === `y`)) {
       if(i == 0) {
-        inclCharset.push(lower);
+        inclCharSet.push(lower);
       }
       if(i == 1) {
-        inclCharset.push(upper);
+        inclCharSet.push(upper);
       }
       if(i == 2) {
-        inclCharset.push(numeral);
+        inclCharSet.push(numeral);
       }
       if(i == 3) {
-        inclCharset.push(special);
+        inclCharSet.push(special);
       }
     }
   }
-  console.log(`chosen charset is ${inclCharset}`);
-  for (let i = 0; i < input[i]; i++){
-    // choose random string from inclCharset
-    let tempCharset = inclCharset[Math.floor(Math.random() * inclCharset.length())]
-    console.log(tempCharset);
+  console.log(`chosen charset is ${inclCharSet}`);
+  for (let i = 0; i < input[4]; i++){
+    // choose random character set from inclCharset
+    let tempCharSet = inclCharSet[Math.floor(Math.random() * inclCharSet.length)]
+    console.log(`tempCharSet =` + tempCharSet);
     // choose random char from chosen string
-    let chosenChar = tempCharset.charAt(Math.floor(Math.random(tempCharset.length())));
+    let chosenChar = tempCharSet.charAt(Math.floor(Math.random() * tempCharSet.length));
     console.log(`chosenChar: ${chosenChar}`);
-    password = password + chosenChar;
-    console.log(`password at this stage is: ${chosenChar}`);
+    password += chosenChar;
+    console.log(`password at this stage is: ${password}`);
   }
 }
 
@@ -66,7 +66,7 @@ function promptCritGen() {
   console.log(`Chosen password length: ${i}`);
   if(i === false) {
     console.log(`Invalid length specified`)
-    return;
+    return undefined;
   }
   let lowerQuery = prompt("Would you like your password to include lowercase characters? Type Y/N");
   console.log(`lowercase selection ${lowerQuery}`);
@@ -95,7 +95,7 @@ function generatePassword() {
   let criteria = promptCritGen();
   if(criteria === undefined) {
     console.log(`Password generation canceled`);
-    alert(`Invalid selection, please answer using Y/N only`)
+    alert(`Invalid selection, please try again`)
     return;
   } 
   console.log(`queryArr is:` + criteria);
