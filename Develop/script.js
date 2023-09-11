@@ -45,17 +45,24 @@ function randChar(input) {
       }
     }
   }
-  console.log(`chosen charset is ${inclCharSet}`);
-  for (let i = 0; i < input[4]; i++){
+  console.log(`chosen charsets are: ${inclCharSet}`);
+  // sets the first index in password to avoid undefined
+  let tempCharSet = inclCharSet[Math.floor(Math.random() * inclCharSet.length)]
+  console.log(`tempCharSet =` + tempCharSet);
+  let chosenChar = tempCharSet.charAt(Math.floor(Math.random() * tempCharSet.length));
+  console.log(`chosenChar: ${chosenChar}`);
+  password = chosenChar;
+  for (let i = 1; i < input[4]; i++){
     // choose random character set from inclCharset
-    let tempCharSet = inclCharSet[Math.floor(Math.random() * inclCharSet.length)]
+    tempCharSet = inclCharSet[Math.floor(Math.random() * inclCharSet.length)]
     console.log(`tempCharSet =` + tempCharSet);
     // choose random char from chosen string
-    let chosenChar = tempCharSet.charAt(Math.floor(Math.random() * tempCharSet.length));
+    chosenChar = tempCharSet.charAt(Math.floor(Math.random() * tempCharSet.length));
     console.log(`chosenChar: ${chosenChar}`);
     password += chosenChar;
     console.log(`password at this stage is: ${password}`);
   }
+  return password;
 }
 
 
@@ -99,7 +106,7 @@ function generatePassword() {
     return;
   } 
   console.log(`queryArr is:` + criteria);
-  randChar(criteria);
+  return randChar(criteria); 
 }
 
 // Get references to the #generate element
