@@ -7,7 +7,7 @@ The purpose of this assignment is to create a password generator to display Java
 This is a password generator that will randomly choose lowercase letters uppercase letters, numbers, and special characters, if the user selects them, 
 
 ## Live Website:
-The live website can be found [here](https://gabriel-viernes.github.io/Secure-Password-Generator/
+The live website can be found [here](https://gabriel-viernes.github.io/Secure-Password-Generator/)
 
 ## Bug Reports:
 Please use the issue tracker provided by Github [here](https://github.com/Gabriel-Viernes/Secure-Password-Generator/issues) to submit bug reports
