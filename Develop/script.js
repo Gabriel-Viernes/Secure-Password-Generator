@@ -20,7 +20,7 @@ function getPassLength() {
 }
 
 // chooses a random character 
-// takes an queryArr from promptCritGen and adds charSets to a temporary array using criteria selected 
+// takes array from promptCritGen and adds charSets to a temporary array using criteria selected 
 function randChar(input) {
   let lower = "abcdefghijklmnopqrstuvwxyz"
   let upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -28,7 +28,7 @@ function randChar(input) {
   let special =  "!#$%&'()*+,-./:;<=>?@[\]^_`{|}~"
   let inclCharSet = [];
   let password;
-  // 
+  // adds character sets to array based on responses given by user
   for (let i = 0; i < 4; i++) {
     if((input[i] === `Y`) || (input[i] === `y`)) {
       if(i == 0) {
@@ -45,6 +45,10 @@ function randChar(input) {
       }
     }
   }
+  if(inclCharSet.length === 0) {
+    alert(`No criteria chosen, exiting...`)
+    return false;
+  }
   // sets the first index in password to avoid undefined
   let tempCharSet = inclCharSet[Math.floor(Math.random() * inclCharSet.length)]
   let chosenChar = tempCharSet.charAt(Math.floor(Math.random() * tempCharSet.length));
@@ -58,11 +62,11 @@ function randChar(input) {
   }
   return password;
 }
-// creates an array with charset selections and chosen password length
+// creates an array with charset selections and chosen password length in following format [lowercase Response, uppercase res, number res, special res, password length]
 // returns array with charset selections and chosen password length
 function promptCritGen() {
-  let i = getPassLength();
-  if(i === false) {
+  let tempLength = getPassLength();
+  if(tempLength === false) {
     console.log(`Invalid length specified`)
     return undefined;
   }
@@ -71,12 +75,13 @@ function promptCritGen() {
   let numQuery = prompt("Would you like your password to include numbers? Type Y/N");
   let specQuery = prompt("Would you like your password to include special characters? Type Y/N");
   let queryArr = [lowerQuery,upperQuery,numQuery,specQuery];
+  // checks for invalid responses
   for (let i = 0; i < queryArr.length; i++) {
     if(yesNoCheck(queryArr[i]) === false) {
       return;
     }
   }
-  queryArr.push(i);
+  queryArr.push(tempLength);
   return queryArr;
 }
 // generates the password
@@ -97,8 +102,13 @@ var generateBtn = document.querySelector("#generate");
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
+  if(password === false) {
+    passwordText.textContent = "No criteria selected"
+    return;
+  } else {
+    passwordText.value = password;
+  }
 
-  passwordText.value = password;
 
 }
 
